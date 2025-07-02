@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Ticket - Movie Magic</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px 0;
+    }
+    .ticket-container {
+      background-color: #111;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: auto;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    }
+    .ticket-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .ticket-header h2 {
+      color: #e50914;
+    }
+    .qr-image {
+      max-width: 150px;
+    }
+    .btns {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    .btns a, .btns form {
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="ticket-container">
+    <div class="ticket-header">
+      <h2>🎟 Movie Ticket Confirmed!</h2>
+      <p>Thank you, <strong>{{ session['user']['name'] }}</strong></p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        <p><strong>Booking ID:</strong> {{ booking.booking_id }}</p>
+        <p><strong>Movie:</strong> {{ booking.movie }}</p>
+        <p><strong>Theater:</strong> {{ booking.theater }}</p>
+        <p><strong>Date:</strong> {{ booking.date }}</p>
+        <p><strong>Time:</strong> {{ booking.time }}</p>
+        <p><strong>Seats:</strong> {{ ', '.join(booking.seats) }}</p>
+        <p><strong>Payment Method:</strong> {{ booking.payment_method }}</p>
+      <!--<p><strong>Ticket Price:</strong> ₹{{ booking.price }}</p-->
+        <p><strong>Seat Prices:</strong> ₹{{ booking.seat_prices | join(', ₹') }}</p>
+        <p><strong>Total Paid:</strong> ₹{{ booking.total_price }}</p>
+        
+        
+
+
+      </div>
+      <div class="col-md-4 text-center">
+        <img src="{{ url_for('static', filename=qr_image.split('static/')[1]) }}" class="qr-image" alt="QR Code">
+      </div>
+    </div>
+
+    <div class="btns">
+      <a href="{{ url_for('home1') }}" class="btn btn-outline-light">🏠 Back to Home</a>
+       <a href="{{ url_for('download_pdf', booking_id=booking.booking_id) }}" class="btn btn-outline-warning">📄 Download Ticket PDF</a>
+      <a href="{{ url_for('logout') }}" class="btn btn-danger">🚪 Logout</a>
+    </div>
+  </div>
+</body>
+</html>

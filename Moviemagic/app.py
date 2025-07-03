@@ -93,12 +93,47 @@ def logout():
     flash('You have been logged out!', 'info')
     return redirect(url_for('index'))
 
-# === Application Routes ===
+
+
 @app.route('/home1')
 def home1():
-    if 'user' not in session:
-        return redirect(url_for('login'))
-    return render_template('home1.html')
+    # Hardcoded movie data
+    movies = [
+        {
+            "id": 1,
+            "title": "RRR",
+            "genre": "Action",
+            "language": "Telugu",
+            "duration": "3h 2m",
+            "price": 150,
+            "poster": "rrr.jpg"
+        },
+        {
+            "id": 2,
+            "title": "Pushpa",
+            "genre": "Action",
+            "language": "Telugu",
+            "duration": "3h 2m",
+            "price": 150,
+            "poster": "pushpa.jpg"
+        },
+        {
+            "id": 3,
+            "title": "Guntur Kaaram",
+            "genre": "Drama",
+            "language": "Telugu",
+            "duration": "2h 45m",
+            "price": 180,
+            "poster": "guntur_kaaram.jpg"
+        }
+    ]
+
+    # Simulate logged-in user
+    session['user'] = {'name': 'Sarath'}
+
+    return render_template('home1.html', movies=movies)
+
+
 
 @app.route('/about')
 def about():

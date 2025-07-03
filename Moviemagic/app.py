@@ -129,6 +129,13 @@ def select_datetime(movie_id):
         flash('Movie not found!', 'danger')
         return redirect(url_for('home1'))
     return render_template('select_datetime.html', movie=movie, now=datetime.now(), timedelta=timedelta)
+@app.route('/show_times', methods=['POST'])
+def show_times():
+    movie_id = int(request.form.get('movie_id'))
+    movie = next((m for m in movies if m['id'] == movie_id), None)
+    selected_date = request.form.get('date')
+    return render_template('show_times.html', movie=movie, selected_date=selected_date)
+
 
 @app.route('/profile')
 def profile():

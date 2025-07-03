@@ -95,39 +95,35 @@ def logout():
 
 
 
-@app.route('/home1')
-def home1():
-    # Hardcoded movie data
-    movies = [
-        {
-            "id": 1,
-            "title": "RRR",
-            "genre": "Action",
-            "language": "Telugu",
-            "duration": "3h 2m",
-            "price": 150,
-            "poster": "rrr.jpg"
-        },
-        {
-            "id": 2,
-            "title": "Pushpa",
-            "genre": "Action",
-            "language": "Telugu",
-            "duration": "3h 2m",
-            "price": 150,
-            "poster": "pushpa.jpg"
-        },
-        {
-            "id": 3,
-            "title": "Guntur Kaaram",
-            "genre": "Drama",
-            "language": "Telugu",
-            "duration": "2h 45m",
-            "price": 180,
-            "poster": "guntur_kaaram.jpg"
-        }
-    ]
-
+movies = [
+    {
+        "id": 1,
+        "title": "RRR",
+        "genre": "Action",
+        "language": "Telugu",
+        "duration": "3h 2m",
+        "price": 150,
+        "poster": "rrr.jpg"  # Make sure this image is in static/posters/
+    },
+    {
+        "id": 2,
+        "title": "Pushpa",
+        "genre": "Action",
+        "language": "Telugu",
+        "duration": "3h 2m",
+        "price": 150,
+        "poster": "pushpa.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Guntur Kaaram",
+        "genre": "Drama",
+        "language": "Telugu",
+        "duration": "2h 45m",
+        "price": 180,
+        "poster": "guntur_kaaram.jpg"
+    }
+]
     # Simulate logged-in user
     session['user'] = {'name': 'Sarath'}
 

@@ -166,6 +166,25 @@ def tickets():
         print(f"Error processing booking: {str(e)}")
         flash('Error processing booking', 'danger')
         return redirect(url_for('home1'))
+@app.route('/user_bookings')
+def user_bookings():
+    if 'user' not in session:
+        flash('Please login to view your bookings.', 'warning')
+        return redirect(url_for('login'))
+
+    try:
+        # Fetch all bookings for the logged-in user
+        response = bookings_table.scan(
+            FilterExpression=boto3.dynamodb.conditions.Attr('booked_by').eq(session['user']['email'])
+        )
+        user_bookings = response.get('Items', [])
+    except ClientError as e:
+        print(f"Error fetching bookings: {e.response['Error']['Message']}")
+        flash('Could not fetch your bookings at this time.', 'danger')
+        user_bookings = []
+
+    return render_template('user_bookings.html', bookings=user_bookings)
+
 
 def send_booking_confirmation(booking):
     """Send booking confirmation email using SNS"""

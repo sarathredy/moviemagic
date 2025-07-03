@@ -107,6 +107,13 @@ def about():
 @app.route('/contact_us')
 def contact():
     return render_template('contact_us.html')
+@app.route('/profile')
+def profile():
+    if 'user' not in session:
+        flash('Please login to view your profile.', 'warning')
+        return redirect(url_for('login'))
+    return render_template('profile.html', user=session['user'])
+
 
 # Booking page
 @app.route('/b1', methods=['GET'])

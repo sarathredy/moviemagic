@@ -24,23 +24,27 @@
 </head>
 <body>
   <div class="container text-center">
-    <h2>Choose Show Time on <span class="text-info">{{ selected_date }}</span></h2>
+    <h2>🎥 Choose Show Time on <span class="text-info">{{ selected_date }}</span></h2>
 
-    <form method="GET" action="{{ url_for('b1', movie_id=movie.id) }}">
-      <input type="hidden" name="selected_date" value="{{ selected_date }}">
+    <form method="GET" action="{{ url_for('booking_page') }}">
+      <!-- Pass selected movie details -->
+      <input type="hidden" name="movie" value="{{ movie.title }}">
+      <input type="hidden" name="price" value="{{ movie.price }}">
+      <input type="hidden" name="theater" value="PVR Cinemas"> <!-- You can customize -->
+      <input type="hidden" name="address" value="Main Street, Hyderabad">
+      <input type="hidden" name="date" value="{{ selected_date }}">
+
       <div class="d-flex flex-wrap justify-content-center mt-4">
-
         {% set showtimes = ['11:30 AM', '3:00 PM', '6:30 PM', '10:00 PM'] %}
         {% for time in showtimes %}
           {% set show_dt = selected_date + ' ' + time %}
           {% set show_datetime = datetime.strptime(show_dt, '%Y-%m-%d %I:%M %p') %}
           {% if show_datetime > current_time %}
-            <button type="submit" name="selected_time" value="{{ time }}" class="btn btn-warning time-btn">
+            <button type="submit" name="time" value="{{ time }}" class="btn btn-warning time-btn">
               {{ time }}
             </button>
           {% endif %}
         {% endfor %}
-
       </div>
     </form>
   </div>

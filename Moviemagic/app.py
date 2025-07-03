@@ -112,7 +112,7 @@ movies = [
         "language": "Telugu",
         "duration": "3h 2m",
         "price": 150,
-        "poster": "pushpa.jpg"
+        "poster": "pushpa.jpeg"
     },
     {
         "id": 3,
@@ -121,7 +121,7 @@ movies = [
         "language": "Telugu",
         "duration": "2h 45m",
         "price": 180,
-        "poster": "guntur_kaaram.jpg"
+        "poster": "gunturkaram.jpeg"
     }
 ]
     # Simulate logged-in user

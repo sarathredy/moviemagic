@@ -48,7 +48,8 @@
           <div class="movie-card-body">
             <div class="movie-title">{{ movie.title }}</div>
             <div class="movie-details">{{ movie.genre }} | {{ movie.language }}<br>{{ movie.duration }} | ₹{{ movie.price }}</div>
-            <a href="#" class="btn btn-book btn-sm text-white">Book Now</a>
+            <a href="{{ url_for('select_datetime', movie_id=movie.id) }}" class="btn btn-book btn-sm text-white">Book Now</a>
+
           </div>
         </div>
       {% endfor %}

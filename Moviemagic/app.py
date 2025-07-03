@@ -135,6 +135,39 @@ def show_times():
     movie = next((m for m in movies if m['id'] == movie_id), None)
     selected_date = request.form.get('date')
     return render_template('show_times.html', movie=movie, selected_date=selected_date)
+@app.route('/b1', methods=['GET', 'POST'])
+def b1():
+    if 'user' not in session:
+        flash('Please login to continue.', 'warning')
+        return redirect(url_for('login'))
+    
+    # Get query parameters
+    movie_id = int(request.args.get('movie_id'))
+    selected_date = request.args.get('selected_date')
+    selected_time = request.args.get('selected_time')
+
+    # Find movie by ID
+    movie = next((m for m in movies if m['id'] == movie_id), None)
+    if not movie:
+        flash('Movie not found!', 'danger')
+        return redirect(url_for('home1'))
+
+    # Dynamically create a booked_seats structure (for demo only)
+    if 'booked_seats' not in movie:
+        movie['booked_seats'] = {}
+
+    # Example: block some demo seats for this show
+    key = f"{selected_date}_{selected_time}"
+    if key not in movie['booked_seats']:
+        movie['booked_seats'][key] = ['1-1', '1-2']  # Example blocked seats
+
+    return render_template(
+        'b1.html',
+        movie=movie,
+        selected_date=selected_date,
+        selected_time=selected_time
+    )
+
 
 
 @app.route('/profile')

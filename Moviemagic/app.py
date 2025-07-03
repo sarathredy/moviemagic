@@ -105,8 +105,21 @@ def about():
     return render_template('about.html')
 
 @app.route('/contact_us')
-def contact():
+def contact_us():
     return render_template('contact_us.html')
+
+@app.route('/select_datetime/<int:movie_id>')
+def select_datetime(movie_id):
+    movie = get_movie_by_id(movie_id)
+    return render_template('select_datetime.html', movie=movie, now=datetime.now(), timedelta=timedelta)
+
+@app.route('/show_times/<int:movie_id>', methods=['POST'])
+def show_times(movie_id):
+    selected_date = request.form.get('date')
+    movie = get_movie_by_id(movie_id)
+    return render_template('show_times.html', movie=movie, selected_date=selected_date, current_time=datetime.now(), datetime=datetime)
+
+
 @app.route('/profile')
 def profile():
     if 'user' not in session:

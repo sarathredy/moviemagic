@@ -24,14 +24,12 @@
 </head>
 <body>
   <div class="container text-center">
-    <h2>🎥 Choose Show Time on <span class="text-info">{{ selected_date }}</span></h2>
+    <h2>Choose Show Time on <span class="text-info">{{ selected_date }}</span></h2>
 
-    <form method="GET" action="{{ url_for('b1') }}">
-      <!-- Pass selected movie details -->
-      <input type="hidden" name="movie_id" value="{{ movie.id }}">
+    <form method="GET" action="{{ url_for('b1', movie_id=movie.id) }}">
       <input type="hidden" name="selected_date" value="{{ selected_date }}">
-
       <div class="d-flex flex-wrap justify-content-center mt-4">
+
         {% set showtimes = ['11:30 AM', '3:00 PM', '6:30 PM', '10:00 PM'] %}
         {% for time in showtimes %}
           {% set show_dt = selected_date + ' ' + time %}
@@ -42,6 +40,7 @@
             </button>
           {% endif %}
         {% endfor %}
+
       </div>
     </form>
   </div>

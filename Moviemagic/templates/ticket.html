@@ -55,9 +55,9 @@
         <p><strong>Date:</strong> {{ booking.date }}</p>
         <p><strong>Time:</strong> {{ booking.time }}</p>
         <p><strong>Seats:</strong> {{ ', '.join(booking.seats) }}</p>
-        <p><strong>Payment Method:</strong> {{ booking.payment_method }}</p>
+        <!--<p><strong>Payment Method:</strong> {{ booking.payment_method }}</p>-->
       <!--<p><strong>Ticket Price:</strong> ₹{{ booking.price }}</p-->
-        <p><strong>Seat Prices:</strong> ₹{{ booking.seat_prices | join(', ₹') }}</p>
+        <!--<p><strong>Seat Prices:</strong> ₹{{ booking.seat_prices | join(', ₹') }}</p>>-->
         <p><strong>Total Paid:</strong> ₹{{ booking.total_price }}</p>
         
         
@@ -71,7 +71,8 @@
 
     <div class="btns">
       <a href="{{ url_for('home1') }}" class="btn btn-outline-light">🏠 Back to Home</a>
-       <a href="{{ url_for('download_pdf', booking_id=booking.booking_id) }}" class="btn btn-outline-warning">📄 Download Ticket PDF</a>
+       <a href="{{ url_for('download_ticket', booking_id=booking.booking_id) }}" class="btn btn-outline-warning">📄 Download Ticket PDF</a>
+
 
       <a href="{{ url_for('logout') }}" class="btn btn-danger">🚪 Logout</a>
     </div>

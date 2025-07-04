@@ -214,4 +214,4 @@ def user_bookings():
     return render_template('user_bookings.html', bookings=user_bookings)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

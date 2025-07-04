@@ -15,6 +15,21 @@
 </head>
 <body class="bg-dark text-light">
   <div class="container mt-5">
+
+    <!-- Flash message alert -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {% for message in messages %}
+            {{ message }}<br>
+          {% endfor %}
+          <button type="button" class="close text-dark" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endif %}
+    {% endwith %}
+
     <h2 class="text-center mb-4">Book Your Seats for {{ movie.title }}</h2>
 
     <div class="text-center mb-3">
@@ -56,57 +71,57 @@
           {% endfor %}
         </div>
       {% endfor %}
-      <div class="text-left mb-3">
-  <a href="{{ url_for('show_times', movie_id=movie.id, selected_date=selected_date) }}" class="btn btn-warning">← Back</a>
-</div>
 
+      <div class="text-left mb-3">
+        <a href="{{ url_for('show_times', movie_id=movie.id, selected_date=selected_date) }}" class="btn btn-warning">← Back</a>
+      </div>
 
       <input type="hidden" id="seats" name="seats">
       <input type="hidden" name="movie_id" value="{{ movie.id }}">
       <input type="hidden" name="selected_date" value="{{ selected_date }}">
       <input type="hidden" name="selected_time" value="{{ selected_time }}">
       <input type="hidden" id="total_price" name="total_price">
+
       <div class="form-group text-center mt-3">
-  <label for="payment_method" class="form-label"><strong>Select Payment Method</strong></label>
-  <select name="payment_method" id="payment_method" class="form-control w-50 mx-auto" required>
-    <option value="">Choose...</option>
-    <option value="Credit Card">Credit Card</option>
-    <option value="UPI">UPI</option>
-    <option value="Net Banking">Net Banking</option>
-    <option value="Cash at Counter">Cash at Counter</option>
-  </select>
-</div>
-<div class="form-group">
-  <label for="full_name">Full Name</label>
-  <input type="text" name="full_name" class="form-control" required>
-</div>
+        <label for="payment_method" class="form-label"><strong>Select Payment Method</strong></label>
+        <select name="payment_method" id="payment_method" class="form-control w-50 mx-auto" required>
+          <option value="">Choose...</option>
+          <option value="Credit Card">Credit Card</option>
+          <option value="UPI">UPI</option>
+          <option value="Net Banking">Net Banking</option>
+          <option value="Cash at Counter">Cash at Counter</option>
+        </select>
+      </div>
 
-<div class="form-group">
-  <label for="email">Email</label>
-  <input type="email" name="email" class="form-control" required>
-</div>
+      <div class="form-group">
+        <label for="full_name">Full Name</label>
+        <input type="text" name="full_name" class="form-control" required>
+      </div>
 
-<div class="form-group">
-  <label for="phone">Phone Number</label>
-  <input type="tel" name="phone" class="form-control" 
-         pattern="[0-9]{10}" 
-         title="Please enter a 10-digit phone number" 
-         maxlength="10" 
-         required>
-</div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" class="form-control" required>
+      </div>
 
-
-
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" name="phone" class="form-control"
+               pattern="[0-9]{10}"
+               title="Please enter a 10-digit phone number"
+               maxlength="10"
+               required>
+      </div>
 
       <div class="text-center mt-3">
         <p><strong>Selected Seats:</strong> <span id="seatList"></span></p>
         <p><strong>Total Price:</strong> ₹<span id="priceTotal">0</span></p>
-        
         <button type="submit" class="btn btn-success mt-2">Confirm Booking</button>
       </div>
+
     </form>
   </div>
 
+  <!-- Seat selection script -->
   <script>
     let selectedSeats = [];
     document.querySelectorAll('.available').forEach(seat => {
@@ -129,5 +144,10 @@
       });
     });
   </script>
+
+  <!-- Bootstrap dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

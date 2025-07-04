@@ -13,10 +13,9 @@
         {% for b in bookings %}
           <li class="list-group-item bg-secondary text-white mb-2">
             <strong>{{ b.movie }}</strong> at {{ b.theater }}<br>
-            Seats: {{ b.seats }} | Price: ₹{{ b.total_price }}<br>
-            Time: {{ b.booking_time }}
-            
-
+            Seats: {{ b.seats | join(", ") }} | Price: ₹{{ b.total_price }}<br>
+            Date: {{ b.date }} | Time: {{ b.time }}<br>
+            Booked On: {{ b.booking_time }}
           </li>
         {% endfor %}
       </ul>

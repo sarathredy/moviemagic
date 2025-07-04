@@ -15,8 +15,8 @@ app.secret_key = 'your_secret_key'
 # AWS setup
 REGION = 'us-east-1'
 dynamodb = boto3.resource('dynamodb', region_name=REGION)
-users_table = dynamodb.Table('userdata')
-bookings_table = dynamodb.Table('Bookingdata')
+users_table = dynamodb.Table('MovieMagic_Users')
+bookings_table = dynamodb.Table('MovieMagic_Bookings')
 
 sns = boto3.client('sns', region_name=REGION)
 sns_topic_arn = 'arn:aws:sns:us-east-1:195275652542:BookingRequestNotifications'

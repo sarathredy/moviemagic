@@ -104,6 +104,10 @@ def home1():
     if 'user' not in session:
         return redirect(url_for('login'))
     return render_template('home1.html', movies=movies)
+    
+@app.route('/contact_us')
+def contact():
+    return render_template('contact_us.html')
 
 @app.route('/select_datetime/<int:movie_id>')
 def select_datetime(movie_id):
